@@ -68,6 +68,8 @@ class Instance{
         Point getPoint(int index);
 
         double getDistance(int startPoint, int endPoint);
+
+        void printDistances();
 };
 
 #endif

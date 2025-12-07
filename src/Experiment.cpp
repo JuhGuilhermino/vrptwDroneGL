@@ -36,6 +36,7 @@ bool Experiment::readInstances(const std::string file){
         }
 
         // Atualiza estado para iniciar o loop
+        numInstances = instances.size();
         currentState = States::STARTING;
         
         return true;
@@ -47,9 +48,8 @@ bool Experiment::readInstances(const std::string file){
 
 void Experiment::runExperiemnt(){
     if (currentState == States::STARTING){
-        numInstances == instances.size();
-
         currentInstance = 30;
+
     } else if (currentState == States::UPDATE_INSTANCE){
         
     } else if (currentState == States::FIND_SOLUTION){
@@ -63,6 +63,25 @@ void Experiment::runExperiemnt(){
 
 void Experiment::render(){
     if (currentState == States::STARTING){
+        if (currentInstance == 0){
+            std::cout << "|---------------------------------------------------------------------------------------------|\n";
+            std::cout << "|                                    INICIAR EXPERIMENTO                                      |\n";
+            std::cout << "|---------------------------------------------------------------------------------------------|\n";
+            std::cout << " Nº de Instâncias: " << numInstances << "\n";
+            std::cout << " Nº Repetições por Instância: " << NUM_RUNS << "\n\n";
+
+        }
+        std::cout << "|---------------------------------------------------------------------------------------------|\n";
+        std::cout << "|                                         INSTANCIA " << currentInstance+1 << "                                         |\n";
+        std::cout << "|---------------------------------------------------------------------------------------------|\n";
+        std::cout << " DADOS\n";
+        std::cout << "       > Drones (rotas): " << instances[currentInstance].getNumDrones() << "\n";
+        std::cout << "       > Pontos de Inspeção: " << instances[currentInstance].getNumPoints() << "\n";
+        std::cout << "       > Velocidade: " << instances[currentInstance].getDroneSpeed() << "m/s\n";
+        std::cout << "       > Duração da Bateria: " << instances[currentInstance].getSafeAutonomy() << "m\n";
+        std::cout << "       > Matriz de Distancias:\n";
+        instances[currentInstance].printDistances();
+        std::cout << "\n\n SOLUÇÕES\n";
         
     } else if (currentState == States::UPDATE_INSTANCE){
         

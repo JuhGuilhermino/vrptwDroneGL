@@ -60,3 +60,17 @@ Point Instance::getPoint(int index){
 double Instance::getDistance(int startPoint, int endPoint){
     return distance[startPoint][endPoint];
 }
+
+void Instance::printDistances(){
+    for (size_t i = 0; i < distance.size(); ++i){
+        std::cout << "         ";
+        for (size_t j = 0; j < distance[i].size(); ++j){
+            std::cout << distance[i][j];
+            if (j < distance[i].size()-1){
+                std::cout << " ";
+            }
+        }
+        std::cout << "\n";
+    }
+    
+}
