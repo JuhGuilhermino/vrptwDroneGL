@@ -34,14 +34,5 @@ void Instance::calculateDistances(){
 
         distance.push_back(line);
         line.clear();
-    }
-
-   
-    for (int i = 0; i <= numPoints; i++){
-            for (int j = 0; j <= numPoints; j++){
-            std::cout << distance[i][j] << "/";
-        }
-        std::cout << "\n";
-    }
-    
+    }    
 }

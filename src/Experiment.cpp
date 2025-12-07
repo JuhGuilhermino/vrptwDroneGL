@@ -35,8 +35,10 @@ bool Experiment::readInstances(const std::string file){
             instances.push_back(fileUtilities.getInstance(i));
         }
 
+        // Atualiza estado para iniciar o loop
+        numInstances = instances.size();
         currentState = States::UPDATE_INSTANCE;
-        numInstances = 1;
+        
         return true;
 
     } else {
@@ -47,8 +49,11 @@ bool Experiment::readInstances(const std::string file){
 void Experiment::runExperiemnt(){
     if (currentState == States::UPDATE_INSTANCE){
         // Avança para próxima instância
-        if (currentRun < NUM_RUNS){ 
+        if (currentRun <= NUM_RUNS){ 
             currentRun++;
+        } else {
+            currentRun = 1;
+            currentInstance++;
         }
         
         // Atualiza estado
