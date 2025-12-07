@@ -15,21 +15,13 @@
 #include <vector>
 #include <math.h>
 #include <iostream>
+#include "Point.h"
 
 /**
  * @brief Classe que armazena pontos de uma instância.
  */
 class Instance{
     private:
-        // < Represneta um ponto de inspeção ou base
-        struct Point {
-            int id;               //< Identificador do ponto
-            double x;             //< Coordenada X
-            double y;             //< Coordenada Y
-            double timeStart;     //< Inicio da janela de tempo
-            double timeEnd;       //< Fim da janela de tempo
-        };
-
         std::vector<Point> points;                  //< Conjunto de pontos
         int numPoints;                              //< Nº de pontos de inspeção
         int numDrones;                              //< Nº de drones utilizados
@@ -64,6 +56,18 @@ class Instance{
          * @brief Calcula e preenche a matriz de distâncias usando a distância Euclidiana.
          */
         void calculateDistances();
+
+        int getNumPoints();
+
+        int getNumDrones();
+
+        double getSafeAutonomy();
+
+        double getDroneSpeed();
+
+        Point getPoint(int index);
+
+        double getDistance(int startPoint, int endPoint);
 };
 
 #endif

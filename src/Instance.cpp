@@ -36,3 +36,27 @@ void Instance::calculateDistances(){
         line.clear();
     }    
 }
+
+int Instance::getNumPoints(){
+    return numPoints;
+}
+
+int Instance::getNumDrones(){
+    return numDrones;
+}
+
+double Instance::getSafeAutonomy(){
+    return safeAutonomy;
+}
+
+double Instance::getDroneSpeed(){
+    return droneSpeed;
+}
+
+Point Instance::getPoint(int index){
+    return points[index];
+}
+
+double Instance::getDistance(int startPoint, int endPoint){
+    return distance[startPoint][endPoint];
+}
