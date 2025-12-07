@@ -43,7 +43,7 @@ class Evaluator{
          * @param solution Solução a ser avalaida
          * @param instance Instancia do problema
          */
-        void evaluate(Solution& solution, const Instance& instance) const;
+        void evaluate(Solution solution, Instance instance);
 };
 
 #endif

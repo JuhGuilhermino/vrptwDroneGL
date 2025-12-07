@@ -64,9 +64,15 @@ void Experiment::runExperiemnt(){
         Evaluator e;
         LocalSearch l(e);
 
-        l.initialSolution(instances[currentInstance]);
+        solutions.push_back(l.initialSolution(instances[currentInstance]));
+        
+        l.swap(solutions[0], instances[currentInstance]);
 
-        std::cout << "deu bom\n";
+        l.relocate(solutions[0], instances[currentInstance]);
+
+        l.apply2Opt(solutions[0], instances[currentInstance]);
+
+        l.random(solutions[0], instances[currentInstance]);
 
         currentInstance++;
 

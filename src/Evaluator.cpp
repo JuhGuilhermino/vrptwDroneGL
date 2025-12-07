@@ -64,3 +64,5 @@ bool Evaluator::checkRoute( std::vector<int> route, Instance instance, double ro
 
     return true; 
 }
+
+void Evaluator::evaluate(Solution solution, Instance instance){}

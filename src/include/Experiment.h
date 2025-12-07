@@ -48,7 +48,8 @@ class Experiment {
         int currentRun = 0;
         std::string fileResults;
         std::vector<Instance> instances;
-        std::vector<std::vector<Solution>> soluctions;  //< Conjunto de soluções para cada execução
+        std::vector<Solution> solutions;
+        std::vector<std::vector<Solution>> soluctionsPerInstance;  //< Conjunto de soluções para cada execução
 
         FileUtilities fileUtilities;
 

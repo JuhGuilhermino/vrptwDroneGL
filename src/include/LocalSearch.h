@@ -23,6 +23,10 @@ class LocalSearch{
     private:
         Evaluator evaluator;
 
+        std::pair<int, int> getRandomPoint(Solution solution);
+
+        int getRandomRouteIndex(Solution solution);
+
     public:
         LocalSearch(Evaluator e);
 
