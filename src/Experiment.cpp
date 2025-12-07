@@ -26,16 +26,22 @@ bool Experiment::validAlgorithm(const std::string a){
 }
 
 bool Experiment::readInstances(const std::string file){
-    /*FileUtilities input(file);
-    if (input.readFile()){
-        // Salvar instância
+    if (fileUtilities.readData(file)){
+        // Salvar nº de instâncias
+        numInstances = fileUtilities.getNumInstances();
+
+        // Salvar instancias
+        for (int i = 0; i < numInstances; i++){
+            instances.push_back(fileUtilities.getInstance(i));
+        }
+
+        currentState = States::UPDATE_INSTANCE;
+        numInstances = 1;
         return true;
+
     } else {
         return false;
-    }*/
-    currentState = States::UPDATE_INSTANCE;
-    numInstances = 1;
-    return true;
+    }
 }
 
 void Experiment::runExperiemnt(){

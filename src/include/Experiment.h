@@ -16,8 +16,8 @@
 #include <string>
 #include <iostream>
 #include <chrono>
-//#include "FileUtilities.h"
-//#include "Instance.h"
+#include "FileUtilities.h"
+#include "Instance.h"
 //#include "Solution.h"
 //#include "GeneticAlgorithm.h"
 //#include "SimulatedAnnealing.h"
@@ -45,8 +45,10 @@ class Experiment {
         int currentInstance = 0;
         int currentRun = 0;
         std::string fileResults;
-        //std::vector<Instance> instances;
+        std::vector<Instance> instances;
         //std::vector<std::vector<Soluctions>> soluctions;  //< Conjunto de soluções para cada execução
+
+        FileUtilities fileUtilities;
 
     public:
         Experiment(const std::string pathResults);
