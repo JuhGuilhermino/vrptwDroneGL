@@ -22,6 +22,9 @@
 //#include "SimulatedAnnealing.h"
 //#include "GeneticAlgorithm.h"
 
+#include "LocalSearch.h"
+#include "Evaluator.h"
+
 class Experiment {
     private:
         enum Algorithms {

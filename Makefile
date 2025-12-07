@@ -8,7 +8,7 @@ CXXFLAGS = -Wall -std=c++17
 TARGET = main
 
 # Fontes do projeto
-SOURCES = src/main.cpp src/Experiment.cpp src/Instance.cpp src/FileUtilities.cpp src/Solution.cpp src/Evaluator.cpp
+SOURCES = src/main.cpp src/Experiment.cpp src/Instance.cpp src/FileUtilities.cpp src/Solution.cpp src/Evaluator.cpp src/LocalSearch.cpp
 
 # Objetos gerados a partir dos fontes
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -34,6 +34,9 @@ solution.o: src/Solution.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 evaluator.o: src/Evaluator.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+local.o: src/LocalSearch.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Limpar os objetos e o executável

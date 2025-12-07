@@ -59,6 +59,13 @@ void Experiment::runExperiemnt(){
         // Atualiza estado
         //currentState = States::FIND_SOLUTION; 
 
+
+        // TESTES DOS ALGORTIMOS - LOCAL SEARCH
+        Evaluator e;
+        LocalSearch l(e);
+
+        l.initialSolution(instances[currentInstance]);
+
         std::cout << "deu bom\n";
 
         currentInstance++;
