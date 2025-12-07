@@ -15,6 +15,7 @@
 #include <vector>
 #include <numeric>
 #include <limits>
+#include <iostream>
 
 class Solution{
     public:
@@ -41,6 +42,8 @@ class Solution{
          * @return Solution 
          */
         Solution deepCopy() const;
+
+        void printSolution();
 };
 
 #endif

@@ -1,8 +1,5 @@
 #include "include/LocalSearch.h"
 
-LocalSearch::LocalSearch(Evaluator e)
-    : evaluator(e){}
-
 std::pair<int, int> LocalSearch::getRandomPoint(Solution solution){
     // Escolhe uma rota aleatória
     int numRoutes = solution.routes.size();
@@ -28,7 +25,7 @@ Solution LocalSearch::initialSolution(Instance instance){
     int numPoints = instance.getNumPoints();
 
     // Gerar solução
-    Solution s(numRoutes);
+    Solution solution(numRoutes);
 
     // Gerar vetor auxiliar
     std::vector<int> points;
@@ -46,29 +43,13 @@ Solution LocalSearch::initialSolution(Instance instance){
     // Distribuir pontos nas rotas
     for (size_t i = 0; i < points.size(); ++i) {
         int droneIndex = i % numRoutes;
-        s.routes[droneIndex].push_back(points[i]);
+        solution.routes[droneIndex].push_back(points[i]);
     }
-
-    //evaluator.evaluate(s, instance);
-
-    /* VERIFICAR SOLUÇÃO
-
-    for (int i = 0; i < numRoutes; i++){
-        std::cout << "INITIAL: [";
-        for (size_t j = 0; j < s.routes[i].size(); ++j){
-            std::cout << s.routes[i][j];
-            if (j < s.routes[i].size() - 1) {
-                std::cout << ", ";
-            }
-        } 
-        std::cout << "]" << std::endl;
-    }
-    */
     
-    return s;
+    return solution;
 }
 
-void LocalSearch::swap(Solution solution, Instance instance){
+void LocalSearch::swap(Solution& solution, Instance instance){
     // Se não houver 2 pontos na solução atual não muda nada
     if (solution.routes.empty() || (solution.routes[0].empty() && solution.routes.size() == 1)) return;
 
@@ -85,23 +66,9 @@ void LocalSearch::swap(Solution solution, Instance instance){
     std::vector<int>& routeA = solution.routes[pointA.first];
     std::vector<int>& routeB = solution.routes[pointB.first];
     std::swap(routeA[pointA.second], routeB[pointB.second]);
-
-    /*
-    VERIFICAR SOLUÇÃO
-    for (size_t i = 0; i < solution.routes.size(); i++){
-        std::cout << "SWAP: [";
-        for (size_t j = 0; j < solution.routes[i].size(); ++j){
-            std::cout << solution.routes[i][j];
-            if (j < solution.routes[i].size() - 1) {
-                std::cout << ", ";
-            }
-        } 
-        std::cout << "]" << std::endl;
-    }
-    */
 }
 
-void LocalSearch::relocate(Solution solution, Instance instance){
+void LocalSearch::relocate(Solution& solution, Instance instance){
     // Se não houver 2 pontos na solução atual não muda nada
     if (solution.routes.empty() || (solution.routes[0].empty() && solution.routes.size() == 1)) return;
 
@@ -125,22 +92,9 @@ void LocalSearch::relocate(Solution solution, Instance instance){
         pointIndexB--;
     }
     routeB.insert(routeB.begin() + pointIndexB, pointToMove);
-
-    /* VERIFICAR SOLUÇÃO
-    for (size_t i = 0; i < solution.routes.size(); i++){
-        std::cout << "RELOCATE: [";
-        for (size_t j = 0; j < solution.routes[i].size(); ++j){
-            std::cout << solution.routes[i][j];
-            if (j < solution.routes[i].size() - 1) {
-                std::cout << ", ";
-            }
-        } 
-        std::cout << "]" << std::endl;
-    }
-    */
 }
 
-void LocalSearch::apply2Opt(Solution solution, Instance instance){
+void LocalSearch::apply2Opt(Solution& solution, Instance instance){
     // Seleciona uma rota
     std::vector<int>* routePtr = nullptr;
     int maxAttempts = 10;
@@ -174,22 +128,9 @@ void LocalSearch::apply2Opt(Solution solution, Instance instance){
 
     // Aplica a inversão
     std::reverse(route.begin() + i, route.begin() + j + 1);
-
-    /* VERIFICAR SOLUÇÃO
-    for (size_t i = 0; i < solution.routes.size(); i++){
-        std::cout << "2-OPT: [";
-        for (size_t j = 0; j < solution.routes[i].size(); ++j){
-            std::cout << solution.routes[i][j];
-            if (j < solution.routes[i].size() - 1) {
-                std::cout << ", ";
-            }
-        } 
-        std::cout << "]" << std::endl;
-    }
-    */
 }
 
-void LocalSearch::random(Solution solution, Instance instance){
+void LocalSearch::random(Solution& solution, Instance instance){
     int moveType = std::rand() % 2; // 0 para Swap, 1 para Relocate
 
     switch (moveType) {
@@ -202,7 +143,5 @@ void LocalSearch::random(Solution solution, Instance instance){
         case 2:
             apply2Opt(solution, instance);
             break;
-    }
-
-    
+    }    
 }

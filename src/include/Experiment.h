@@ -19,11 +19,10 @@
 #include "FileUtilities.h"
 #include "Instance.h"
 #include "Solution.h"
-//#include "SimulatedAnnealing.h"
-//#include "GeneticAlgorithm.h"
-
 #include "LocalSearch.h"
 #include "Evaluator.h"
+#include "SimulatedAnnealing.h"
+//#include "GeneticAlgorithm.h"
 
 class Experiment {
     private:
@@ -33,6 +32,7 @@ class Experiment {
         };
 
         enum States {
+            STARTING,
             UPDATE_INSTANCE,
             FIND_SOLUTION,
             CALCULATE_METRICS,
@@ -40,6 +40,7 @@ class Experiment {
         };
 
         const int NUM_RUNS = 30;
+
         int algortithm;
         int currentState;
         int numInstances;
@@ -50,7 +51,6 @@ class Experiment {
         std::vector<Instance> instances;
         std::vector<Solution> solutions;
         std::vector<std::vector<Solution>> soluctionsPerInstance;  //< Conjunto de soluções para cada execução
-
         FileUtilities fileUtilities;
 
     public:

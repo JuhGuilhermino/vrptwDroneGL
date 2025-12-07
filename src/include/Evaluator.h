@@ -12,7 +12,9 @@
 #ifndef EVALUATOR_H
 #define EVALUATOR_H
 
-#include <cmath>
+#include <iostream>
+#include <numeric>
+#include <algorithm>
 #include "Solution.h"
 #include "Instance.h"
 #include "Point.h"
@@ -43,7 +45,7 @@ class Evaluator{
          * @param solution Solução a ser avalaida
          * @param instance Instancia do problema
          */
-        void evaluate(Solution solution, Instance instance);
+        void evaluate(Solution& solution, Instance instance);
 };
 
 #endif

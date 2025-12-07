@@ -14,3 +14,18 @@ Solution Solution::deepCopy() const {
     newSolution.routes = this->routes; 
     return newSolution;
 }
+
+void Solution::printSolution(){
+    std::cout << "SOLUTION 1: " << isFeasible << " " << objectiveValue;
+    for (size_t i = 0; i < routes.size(); ++i){
+        std::cout << "  [";
+        for (size_t j = 0; j < routes[i].size(); ++j){
+            std::cout << routes[i][j];
+            if (j < routes[i].size() - 1) {
+                std::cout << " | ";
+            }
+        }
+        std::cout << "]  ";
+    }
+    std::cout << "\n";
+}

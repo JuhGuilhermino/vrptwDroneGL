@@ -36,8 +36,7 @@ bool Experiment::readInstances(const std::string file){
         }
 
         // Atualiza estado para iniciar o loop
-        numInstances = instances.size();
-        currentState = States::UPDATE_INSTANCE;
+        currentState = States::STARTING;
         
         return true;
 
@@ -47,35 +46,12 @@ bool Experiment::readInstances(const std::string file){
 }
 
 void Experiment::runExperiemnt(){
-    if (currentState == States::UPDATE_INSTANCE){
-        // Avança para próxima instância
-        if (currentRun <= NUM_RUNS){ 
-            currentRun++;
-        } else {
-            currentRun = 1;
-            currentInstance++;
-        }
+    if (currentState == States::STARTING){
+        numInstances == instances.size();
+
+        currentInstance = 30;
+    } else if (currentState == States::UPDATE_INSTANCE){
         
-        // Atualiza estado
-        //currentState = States::FIND_SOLUTION; 
-
-
-        // TESTES DOS ALGORTIMOS - LOCAL SEARCH
-        Evaluator e;
-        LocalSearch l(e);
-
-        solutions.push_back(l.initialSolution(instances[currentInstance]));
-        
-        l.swap(solutions[0], instances[currentInstance]);
-
-        l.relocate(solutions[0], instances[currentInstance]);
-
-        l.apply2Opt(solutions[0], instances[currentInstance]);
-
-        l.random(solutions[0], instances[currentInstance]);
-
-        currentInstance++;
-
     } else if (currentState == States::FIND_SOLUTION){
         
     } else if (currentState == States::CALCULATE_METRICS){
@@ -86,7 +62,9 @@ void Experiment::runExperiemnt(){
 }
 
 void Experiment::render(){
-    if (currentState == States::UPDATE_INSTANCE){
+    if (currentState == States::STARTING){
+        
+    } else if (currentState == States::UPDATE_INSTANCE){
         
     } else if (currentState == States::FIND_SOLUTION){
         

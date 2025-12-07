@@ -65,4 +65,48 @@ bool Evaluator::checkRoute( std::vector<int> route, Instance instance, double ro
     return true; 
 }
 
-void Evaluator::evaluate(Solution solution, Instance instance){}
+void Evaluator::evaluate(Solution& solution, Instance instance){
+    double totalCost = 0;
+    solution.isFeasible = true; 
+
+    // RESTRIÇÃO 1: todos os pontos foram visitados pelo menos uma vez
+    std::vector<bool> visitedPoints(instance.getNumPoints(), false); 
+    visitedPoints[0] = true; 
+
+    // RESTRIÇÃO 2: valida se o custo das rotas e suportado pelo tempo de autonomia
+    for (const auto& route : solution.routes) {
+        double currentRouteCost = 0.0;
+
+        // Confere viabilidade e calcula custo (Autonomia + Janela de Tempo)
+        if (!checkRoute(route, instance, currentRouteCost)) {
+            solution.isFeasible = false; // Se uma rota falha, a solução inteira falha.
+        }
+        
+        totalCost += currentRouteCost;
+
+        // Checagem de Cobertura e Duplicação (dentro do for para falhar rápido)
+        for (int pointId : route) {
+            if (pointId < 1 || pointId >= (int)visitedPoints.size()) {
+                solution.isFeasible = false;
+            } else if (visitedPoints[pointId]) {
+                solution.isFeasible = false;
+            }
+            visitedPoints[pointId] = true;
+        }
+    }
+
+    // 3: Todos os pontos foram visitados
+    for (size_t i = 1; i < visitedPoints.size(); ++i) {
+        if (!visitedPoints[i]) {
+            solution.isFeasible = false; // Ponto não visitado!
+            break;
+        }
+    }
+
+    // 4. Calculo do curso (função objetivo = tempo de voo + tempo de espera)
+    if (solution.isFeasible) {
+        solution.objectiveValue = totalCost;
+    } else {
+        solution.objectiveValue = totalCost + PENALTY_VALUE;
+    }
+}
